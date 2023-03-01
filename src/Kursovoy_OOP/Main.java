@@ -1,19 +1,31 @@
 package Kursovoy_OOP;
 
 import java.util.Scanner;
-
 public class Main {
+    static Scanner in = new Scanner(System.in);
     static int os=0;
     public static void main(String[] args) {
         outputMenu();
-        inputMenu(input());
+        inputMenu(inputRestriction(0,3));
     }
     public static int input() {
-        Scanner in = new Scanner(System.in);
-        int os = 0;
         os = in.nextInt();
         return os;
     }
+
+    public static int inputRestriction(int min, int max) {
+        while (true) {
+            if (in.hasNextLine()) {
+                int number = input();
+                if (number >= min && number <= max) {
+                    return number;
+                }
+                in.nextLine();
+                System.out.print("Введите число от " + min + " до " + max + " - ");
+            }
+        }
+    }
+
     public static void outputMenu() {
         System.out.print(
                 "************************* МЕНЮ **********************:\n" +
@@ -29,7 +41,7 @@ public class Main {
     public static void inputMenu(int i) {
         switch (i) {
             case 0:
-                System.out.println("Вы передумали?\n");
+                System.out.println("Выход\n");
                 break;
             case 1:
                 System.out.println("Вы выбрали- заносить задачи\n");
@@ -40,7 +52,7 @@ public class Main {
             case 3:
                 System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
                 outputMenuPeriod();
-                inputMenuPeriod(input());
+                inputMenuPeriod(inputRestriction(0,5));
                 break;
             default:
                 System.out.println("Вы ввели не верное число ");
@@ -63,7 +75,7 @@ public class Main {
     public static void inputMenuPeriod(int i) {
         switch (i) {
             case 0:
-                System.out.println("Вы передумали?\n");
+                System.out.println("Выход?\n");
                 break;
             case 1:
                 System.out.println("Вы выбрали-однократная \n");
