@@ -3,53 +3,54 @@ package Kursovoy_OOP;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task {
-    private final int idGenerator;
-    private String title;
-    private final Type type;
-    private final int id;
-    private final LocalDateTime dateTime;
-    private String description;
+public abstract class Task extends Type {
+    private String titleTask; // заголовок
+    private String descriptionTask;// описание
+    private Type typeTask;// тип Личная или рабочая
+    private LocalDateTime dateTimeTask; // Дата создания задачи
 
-    public Task(int idGenerator, String title, Type type, int id, LocalDateTime dateTime, String description) {
-        this.idGenerator = idGenerator;
-        this.title = title;
-        this.type = type;
-        this.id = id;
-        this.dateTime = dateTime;
-        this.description = description;
+    private static Integer count=1;
+    private final Integer id;
+
+
+    public Task(String titleTask, String descriptionTask, Type typeTask, LocalDateTime dateTimeTask) {
+        this.titleTask = titleTask;
+        this.descriptionTask = descriptionTask;
+        this.typeTask = typeTask;
+        this.dateTimeTask = dateTimeTask;
+        id = count++;
     }
 
-    public int getIdGenerator() {
-        return idGenerator;
+    public String getTitleTask() {
+        return titleTask;
     }
 
-    public String getTitle() {
-        return title;
+    public void setTitleTask(String titleTask) {
+        this.titleTask = titleTask;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getDescriptionTask() {
+        return descriptionTask;
     }
 
-    public Type getType() {
-        return type;
+    public void setDescriptionTask(String descriptionTask) {
+        this.descriptionTask = descriptionTask;
     }
 
-    public int getId() {
-        return id;
+    public Type getTypeTask() {
+        return typeTask;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public void setTypeTask(Type typeTask) {
+        this.typeTask = typeTask;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalDateTime getDateTimeTask() {
+        return dateTimeTask;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDateTimeTask(LocalDateTime dateTimeTask) {
+        this.dateTimeTask = dateTimeTask;
     }
 
     @Override
@@ -57,23 +58,23 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return idGenerator == task.idGenerator && id == task.id && title.equals(task.title) && type.equals(task.type) && dateTime.equals(task.dateTime) && description.equals(task.description);
+        return titleTask.equals(task.titleTask) && descriptionTask.equals(task.descriptionTask) && typeTask.equals(task.typeTask) && dateTimeTask.equals(task.dateTimeTask) && id.equals(task.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idGenerator, title, type, id, dateTime, description);
+        return Objects.hash(titleTask, descriptionTask, typeTask, dateTimeTask, id);
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "idGenerator=" + idGenerator +
-                ", title='" + title + '\'' +
-                ", type=" + type +
+                "titleTask='" + titleTask + '\'' +
+                ", descriptionTask='" + descriptionTask + '\'' +
+                ", typeTask=" + typeTask +
+                ", dateTimeTask=" + dateTimeTask +
                 ", id=" + id +
-                ", dateTime=" + dateTime +
-                ", description='" + description + '\'' +
                 '}';
     }
 }
+
