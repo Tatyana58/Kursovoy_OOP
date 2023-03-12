@@ -1,4 +1,4 @@
-package Kursovoy_OOP;
+package Kursovoy_OOP.Exception;
 
 public class TaskNotFoundException extends RuntimeException{
     public TaskNotFoundException(){

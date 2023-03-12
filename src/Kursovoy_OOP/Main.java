@@ -4,11 +4,13 @@ import java.util.Scanner;
 public class Main {
     static Scanner in = new Scanner(System.in);
     static int os=0;
+    public static Scanner scanner;
+
     public static void main(String[] args) {
         outputMenu();
-        inputMenu(inputRestriction(0,3));
+        inputMenu(inputRestriction(0, 3));
     }
-    public static int input() {
+    public static int inputInt() {
         os = in.nextInt();
         return os;
     }
@@ -16,7 +18,7 @@ public class Main {
     public static int inputRestriction(int min, int max) {
         while (true) {
             if (in.hasNextLine()) {
-                int number = input();
+                int number = inputInt();
                 if (number >= min && number <= max) {
                     return number;
                 }
@@ -38,26 +40,40 @@ public class Main {
                         "-Введите число, соответствующее ответу: "
         );
     }
-    public static void inputMenu(int i) {
-        switch (i) {
-            case 0:
-                System.out.println("Выход\n");
-                break;
-            case 1:
-                System.out.println("Вы выбрали- добавить задачи\n");
-                break;
-            case 2:
-                System.out.println("Вы выбрали- удалять задачи\n");
-                break;
-            case 3:
-                System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
-                outputMenuPeriod();
-                inputMenuPeriod(inputRestriction(0,5));
-                break;
-            default:
-                System.out.println("Вы ввели не верное число ");
-        }
-    }
+    public static void inputMenu(int menu) {
+        //try (Scanner in = new Scanner(System.in)) {
+            Label:
+           // while (true) {
+                //outputMenu();
+               // if (scanner.hasNextInt()) {
+
+                    switch (menu) {
+                        case 0:
+                            System.out.println("Выход\n");
+                            break;
+                        case 1:
+                            System.out.println("Вы выбрали- добавить задачи : ");
+                            TaskService.addTask(scanner);
+                            break;
+                        case 2:
+                            System.out.println("Вы выбрали- удалять задачи\n");
+                            break;
+                        case 3:
+                            System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
+                            outputMenuPeriod();
+                            inputMenuPeriod(inputRestriction(0, 5));
+                            break;
+                        default:
+                            System.out.println("Вы ввели не верное число ");
+//                            break Label;
+                    }
+               // } else {
+                    scanner.next();
+                    System.out.println("Выберите пункт меню из списка.");
+                }
+            //}
+        //}
+    //}
     public static void outputMenuPeriod() {
         System.out.print(
                 "************************* МЕНЮ **********************:\n" +

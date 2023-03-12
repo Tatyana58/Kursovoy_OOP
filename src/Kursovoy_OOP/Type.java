@@ -1,16 +1,11 @@
 package Kursovoy_OOP;
 
-public class Type {
+public enum Type  {
+    WORK(0),
+    PERSONAL(1);
+    public final int value;
 
-    final String WORK="Рабочий";
-    final String PERSONAL="Личный";
-
-
-    public String getWORK() {
-        return WORK;
-    }
-
-    public String getPERSONAL() {
-        return PERSONAL;
+    Type(final int value) {
+        this.value = value;
     }
 }
