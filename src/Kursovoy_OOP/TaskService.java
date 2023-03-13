@@ -1,8 +1,6 @@
 package Kursovoy_OOP;
 
 import Kursovoy_OOP.Exception.TaskNotFoundException;
-import Kursovoy_OOP.Period.DailyTask;
-import Kursovoy_OOP.Period.OneTimeTask;
 import Kursovoy_OOP.Utilite.ValidateUtils;
 
 import java.lang.invoke.WrongMethodTypeException;
@@ -14,26 +12,25 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TaskService {
-    //public static Scanner scanner = new Scanner(System.in);
     private static final Map<Integer, Repeatable> activeTask = new HashMap<>();
 
     public static void addTask(Scanner scanner) {
-
+        Scanner scanner1 = new Scanner(System.in);
         try {
             //scanner.hasNextInt();
             System.out.println("Введите название задачи : ");
-            String titleTask = ValidateUtils.checkingString(Main.scanner.nextLine());
+            String titleTask = scanner1.nextLine();
             System.out.println("Введите описание задачи : ");
-            String descriptionTask = Main.scanner.nextLine();
+            String descriptionTask = ValidateUtils.checkingString(scanner1.nextLine());
             System.out.println("Выберите тип задачи : 0 - рабочая, 1 - личная.");
-            String typeTask = String.valueOf(Type.values()[Main.scanner.nextInt()]);
+            String typeTask = String.valueOf(Type.values()[scanner1.nextInt()]);
             System.out.println("Введите повторяемость задачи : 0 - однократная, 1 - ежедневная, 2 - еженедельная, 3 - ежемесячная, 4 - ежегодная");
-            int appearance = Main.scanner.nextInt();
+            int appearance = scanner1.nextInt();
             System.out.println("Введите дату dd.MM.yyyy HH.mm");
-            Main.scanner.nextLine();
+            scanner1.nextLine();
             createEvent(scanner, titleTask, descriptionTask, typeTask, appearance);
             System.out.println("Для выхода нажмите  - Enter.\n");
-            Main.scanner.nextLine();
+            scanner1.nextLine();
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
         }

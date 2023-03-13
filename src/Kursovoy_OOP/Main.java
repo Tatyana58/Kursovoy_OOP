@@ -2,7 +2,7 @@ package Kursovoy_OOP;
 
 import java.util.Scanner;
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner1 = new Scanner(System.in);
     static int os=0;
     //public static Scanner scanner;
 
@@ -11,18 +11,18 @@ public class Main {
        inputMenu();
     }
     public static int inputInt() {
-        os = scanner.nextInt();
+        os = scanner1.nextInt();
         return os;
     }
 
     public static int inputRestriction(int min, int max) {
         while (true) {
-            if (scanner.hasNextLine()) {
+            if (scanner1.hasNextLine()) {
                 int number = inputInt();
                 if (number >= min && number <= max) {
                     return number;
                 }
-                scanner.nextLine();
+                scanner1.nextLine();
                 System.out.print("Введите число от " + min + " до " + max + " : ");
             }
         }
@@ -45,15 +45,15 @@ public class Main {
         Label:
         // while (true) {
         //outputMenu();
-        if (scanner.hasNextInt()) {
-            int menu = scanner.nextInt();
+        if (scanner1.hasNextInt()) {
+            int menu = scanner1.nextInt();
             switch (menu) {
                 case 0:
                     System.out.println("Выход\n");
                     break;
                 case 1:
                     System.out.println("Вы выбрали- добавить задачи : ");
-                    TaskService.addTask(scanner);
+                    TaskService.addTask(scanner1);
                     break;
                 case 2:
                     System.out.println("Вы выбрали- удалять задачи\n");
@@ -68,7 +68,7 @@ public class Main {
                     break Label;
             }
         } else {
-            scanner.next();
+            scanner1.next();
             System.out.println("Выберите пункт меню из списка.");
         }
         //}
