@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TaskService {
-    public static Scanner scanner = new Scanner(System.in);
+    //public static Scanner scanner = new Scanner(System.in);
     private static final Map<Integer, Repeatable> activeTask = new HashMap<>();
 
     public static void addTask(Scanner scanner) {
@@ -22,19 +22,18 @@ public class TaskService {
         try {
             //scanner.hasNextInt();
             System.out.println("Введите название задачи : ");
-            String titleTask = ValidateUtils.checkingString(scanner.nextLine());
+            String titleTask = ValidateUtils.checkingString(Main.scanner.nextLine());
             System.out.println("Введите описание задачи : ");
-            String descriptionTask = ValidateUtils.checkingString(scanner.nextLine());
+            String descriptionTask = Main.scanner.nextLine();
             System.out.println("Выберите тип задачи : 0 - рабочая, 1 - личная.");
-            String typeTask = String.valueOf(Type.values()[scanner.nextInt()]);
+            String typeTask = String.valueOf(Type.values()[Main.scanner.nextInt()]);
             System.out.println("Введите повторяемость задачи : 0 - однократная, 1 - ежедневная, 2 - еженедельная, 3 - ежемесячная, 4 - ежегодная");
-            int appearance = scanner.nextInt();
+            int appearance = Main.scanner.nextInt();
             System.out.println("Введите дату dd.MM.yyyy HH.mm");
-            scanner.nextLine();
+            Main.scanner.nextLine();
             createEvent(scanner, titleTask, descriptionTask, typeTask, appearance);
-            System.out.println("Для выхода нажмите Enter\n");
-            scanner.nextLine();
-
+            System.out.println("Для выхода нажмите  - Enter.\n");
+            Main.scanner.nextLine();
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -46,7 +45,7 @@ public class TaskService {
             Repeatable task = null;
             try {
                 task = createTask(appearance, titleTask, descriptionTask, typeTask, eventDate);
-                System.out.println("Задача создана" + task);
+                System.out.println("Задача создана. " + task);
 
             } catch (WrongMethodTypeException e) {
                 System.out.println(e.getMessage());

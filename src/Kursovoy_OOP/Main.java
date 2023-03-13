@@ -2,32 +2,31 @@ package Kursovoy_OOP;
 
 import java.util.Scanner;
 public class Main {
-    static Scanner in = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     static int os=0;
-    public static Scanner scanner;
+    //public static Scanner scanner;
 
     public static void main(String[] args) {
-        outputMenu();
-        inputMenu(inputRestriction(0, 3));
+       outputMenu();
+       inputMenu();
     }
     public static int inputInt() {
-        os = in.nextInt();
+        os = scanner.nextInt();
         return os;
     }
 
     public static int inputRestriction(int min, int max) {
         while (true) {
-            if (in.hasNextLine()) {
+            if (scanner.hasNextLine()) {
                 int number = inputInt();
                 if (number >= min && number <= max) {
                     return number;
                 }
-                in.nextLine();
+                scanner.nextLine();
                 System.out.print("Введите число от " + min + " до " + max + " : ");
             }
         }
     }
-
     public static void outputMenu() {
         System.out.print(
                 "************************* МЕНЮ **********************:\n" +
@@ -40,41 +39,43 @@ public class Main {
                         "-Введите число, соответствующее ответу: "
         );
     }
-    public static void inputMenu(int menu) {
-        //try (Scanner in = new Scanner(System.in)) {
-            Label:
-           // while (true) {
-                //outputMenu();
-               // if (scanner.hasNextInt()) {
 
-                    switch (menu) {
-                        case 0:
-                            System.out.println("Выход\n");
-                            break;
-                        case 1:
-                            System.out.println("Вы выбрали- добавить задачи : ");
-                            TaskService.addTask(scanner);
-                            break;
-                        case 2:
-                            System.out.println("Вы выбрали- удалять задачи\n");
-                            break;
-                        case 3:
-                            System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
-                            outputMenuPeriod();
-                            inputMenuPeriod(inputRestriction(0, 5));
-                            break;
-                        default:
-                            System.out.println("Вы ввели не верное число ");
-//                            break Label;
-                    }
-               // } else {
-                    scanner.next();
-                    System.out.println("Выберите пункт меню из списка.");
-                }
-            //}
+    public static void inputMenu() {
+        //try {
+        Label:
+        // while (true) {
+        //outputMenu();
+        if (scanner.hasNextInt()) {
+            int menu = scanner.nextInt();
+            switch (menu) {
+                case 0:
+                    System.out.println("Выход\n");
+                    break;
+                case 1:
+                    System.out.println("Вы выбрали- добавить задачи : ");
+                    TaskService.addTask(scanner);
+                    break;
+                case 2:
+                    System.out.println("Вы выбрали- удалять задачи\n");
+                    break ;
+                case 3:
+                    System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
+                    outputMenuPeriod();
+                    inputMenuPeriod(inputRestriction(0, 5));
+                    break;
+                default:
+                    System.out.println("Вы ввели не верное число ");
+                    break Label;
+            }
+        } else {
+            scanner.next();
+            System.out.println("Выберите пункт меню из списка.");
+        }
         //}
-    //}
-    public static void outputMenuPeriod() {
+        //}
+        //}
+    }
+    public static void outputMenuPeriod(){
         System.out.print(
                 "************************* МЕНЮ **********************:\n" +
                         "Выберете из данного меню цифру \n"+
@@ -111,5 +112,4 @@ public class Main {
                 System.out.println("Вы ввели не верное число ");
         }
     }
-
 }
