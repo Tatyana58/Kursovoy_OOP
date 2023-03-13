@@ -1,28 +1,27 @@
 package Kursovoy_OOP;
 
+import java.awt.*;
 import java.util.Scanner;
 public class Main {
-    public static Scanner scanner1 = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     static int os=0;
-    //public static Scanner scanner;
-
     public static void main(String[] args) {
        outputMenu();
        inputMenu();
     }
     public static int inputInt() {
-        os = scanner1.nextInt();
+        os = scanner.nextInt();
         return os;
     }
 
     public static int inputRestriction(int min, int max) {
         while (true) {
-            if (scanner1.hasNextLine()) {
+            if (scanner.hasNextLine()) {
                 int number = inputInt();
                 if (number >= min && number <= max) {
                     return number;
                 }
-                scanner1.nextLine();
+                scanner.nextLine();
                 System.out.print("Введите число от " + min + " до " + max + " : ");
             }
         }
@@ -42,38 +41,35 @@ public class Main {
 
     public static void inputMenu() {
         //try {
-        Label:
+
         // while (true) {
-        //outputMenu();
-        if (scanner1.hasNextInt()) {
-            int menu = scanner1.nextInt();
+        Label:
+        if (scanner.hasNextInt()) {
+            int menu = scanner.nextInt();
             switch (menu) {
                 case 0:
                     System.out.println("Выход\n");
                     break;
                 case 1:
                     System.out.println("Вы выбрали- добавить задачи : ");
-                    TaskService.addTask(scanner1);
+                    TaskService.addTask(scanner);
                     break;
                 case 2:
                     System.out.println("Вы выбрали- удалять задачи\n");
-                    break ;
+                    break;
                 case 3:
                     System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
                     outputMenuPeriod();
                     inputMenuPeriod(inputRestriction(0, 5));
                     break;
                 default:
-                    System.out.println("Вы ввели не верное число ");
-                    break Label;
+                    System.out.println("Вы ввели не верное число. Повторите ввод. ");
+                    System.out.println("Выберите пункт меню из списка.");
+                    outputMenu();
+                    inputMenu();
+                    break;
             }
-        } else {
-            scanner1.next();
-            System.out.println("Выберите пункт меню из списка.");
         }
-        //}
-        //}
-        //}
     }
     public static void outputMenuPeriod(){
         System.out.print(

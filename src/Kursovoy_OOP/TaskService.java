@@ -1,8 +1,8 @@
 package Kursovoy_OOP;
-
 import Kursovoy_OOP.Exception.TaskNotFoundException;
+import Kursovoy_OOP.Period.DailyTask;
+import Kursovoy_OOP.Period.OneTimeTask;
 import Kursovoy_OOP.Utilite.ValidateUtils;
-
 import java.lang.invoke.WrongMethodTypeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,14 +13,12 @@ import java.util.Scanner;
 
 public class TaskService {
     private static final Map<Integer, Repeatable> activeTask = new HashMap<>();
-
     public static void addTask(Scanner scanner) {
         Scanner scanner1 = new Scanner(System.in);
         try {
-            //scanner.hasNextInt();
-            System.out.println("Введите название задачи : ");
-            String titleTask = scanner1.nextLine();
-            System.out.println("Введите описание задачи : ");
+            System.out.print("Введите название задачи : ");
+            String titleTask = ValidateUtils.checkingString(scanner1.nextLine());
+            System.out.print("Введите описание задачи : ");
             String descriptionTask = ValidateUtils.checkingString(scanner1.nextLine());
             System.out.println("Выберите тип задачи : 0 - рабочая, 1 - личная.");
             String typeTask = String.valueOf(Type.values()[scanner1.nextInt()]);
@@ -29,7 +27,7 @@ public class TaskService {
             System.out.println("Введите дату dd.MM.yyyy HH.mm");
             scanner1.nextLine();
             createEvent(scanner, titleTask, descriptionTask, typeTask, appearance);
-            System.out.println("Для выхода нажмите  - Enter.\n");
+            System.out.print("Для выхода нажмите  - Enter.");
             scanner1.nextLine();
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
@@ -43,7 +41,6 @@ public class TaskService {
             try {
                 task = createTask(appearance, titleTask, descriptionTask, typeTask, eventDate);
                 System.out.println("Задача создана. " + task);
-
             } catch (WrongMethodTypeException e) {
                 System.out.println(e.getMessage());
             }
@@ -53,7 +50,7 @@ public class TaskService {
         }
     }
 
-    private static Repeatable createTask(int appearance, String titleTask, String descriptionTask, String typeTask, LocalDateTime eventDate) throws TaskNotFoundException {
+    private static <yield> Repeatable createTask(int appearance, String titleTask, String descriptionTask, String typeTask, LocalDateTime eventDate) throws TaskNotFoundException {
 //        switch (appearance) {
 //                case 0:
 //                    System.out.println("Выход?\n");
@@ -81,7 +78,7 @@ public class TaskService {
 //                default:
 //                    System.out.println("Вы ввели не верное число ");
 //            }
-//        }
+//
        return null;
     }
     public static String deleteTask(String task) {
