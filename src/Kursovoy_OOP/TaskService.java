@@ -1,7 +1,6 @@
 package Kursovoy_OOP;
 import Kursovoy_OOP.Exception.TaskNotFoundException;
-import Kursovoy_OOP.Period.DailyTask;
-import Kursovoy_OOP.Period.OneTimeTask;
+import Kursovoy_OOP.Period.*;
 import Kursovoy_OOP.Utilite.ValidateUtils;
 import java.lang.invoke.WrongMethodTypeException;
 import java.time.LocalDateTime;
@@ -27,7 +26,7 @@ public class TaskService {
             System.out.println("Введите дату dd.MM.yyyy HH.mm");
             scanner1.nextLine();
             createEvent(scanner, titleTask, descriptionTask, typeTask, appearance);
-            System.out.print("Для выхода нажмите  - Enter.");
+            System.out.print("Для дальнейшей работы нажмите  - Enter.");
             scanner1.nextLine();
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
@@ -50,42 +49,70 @@ public class TaskService {
         }
     }
 
-    private static <yield> Repeatable createTask(int appearance, String titleTask, String descriptionTask, String typeTask, LocalDateTime eventDate) throws TaskNotFoundException {
-//        switch (appearance) {
+    private static Repeatable createTask(int checkingAppearance, String titleTask, String descriptionTask, String typeTask, LocalDateTime localDateTime) throws TaskNotFoundException {
+//        switch (checkingAppearance) {
 //                case 0:
 //                    System.out.println("Выход?\n");
 //                    break;
-//                case 1->{
+//                case 1-> {
 //                    System.out.println("Вы выбрали-однократная \n");
-//                    OneTimeTask oneTimeTask = new OneTimeTask(titleTask,descriptionTask,typeTask,LocalDateTime);
+//                    OneTimeTask oneTimeTask = new OneTimeTask(titleTask, descriptionTask, typeTask, localDateTime);
 //                    activeTask.put(oneTimeTask.getId(), oneTimeTask);
-//                    yield oneTimeTask;
+//                    //yield oneTimeTask;
+//                    break;
 //                }
-//                case 2->{
+//                case 2:
 //                        System.out.println("Вы выбрали-однократная \n");
-//                    DailyTask dailyTask = new DailyTask(titleTask, descriptionTask, typeTask, LocalDateTime);
+//                    DailyTask dailyTask = new DailyTask(titleTask, descriptionTask, typeTask, localDateTime);
 //                    activeTask.put(dailyTask.getId(), dailyTask);
-//                    yield dailyTask;
-//                }
+//                    //yield dailyTask;
+//                    break;
+//
 //                case 3:
 //                    System.out.println("Вы выбрали- еженедельная\n");
+//                    WeeklyTask weeklyTask = new WeeklyTask(titleTask, descriptionTask, typeTask, localDateTime);
+//                    activeTask.put(weeklyTask.getId(), weeklyTask);
+//                    //yield dailyTask;
+//                    break;
 //                case 4:
 //                    System.out.println("Вы выбрали- ежемесячная\n");
+//                    MonthlyTask monthlyTask = new MonthlyTask(titleTask, descriptionTask, typeTask, localDateTime);
+//                    activeTask.put(monthlyTask.getId(), monthlyTask);
+//                    //yield dailyTask;
 //                    break;
 //                case 5:
 //                    System.out.println("Вы выбрали- ежегодная\n");
+//                    YearlyTask yearlyTask = new YearlyTask(titleTask, descriptionTask, typeTask, localDateTime);
+//                    activeTask.put(yearlyTask.getId(), yearlyTask);
+//                    //yield dailyTask;
 //                    break;
 //                default:
-//                    System.out.println("Вы ввели не верное число ");
-//            }
-//
+//                    System.out.println("Вы ввели неверное число ");
+//                    break;
+//           }
        return null;
     }
-    public static String deleteTask(String task) {
-        return task;
+    public static void deleteTask(Scanner scanner1) {
+        System.out.println("Текущие задачи");
+        printActualTask();
+        System.out.print("Для удаления введите ID задачи");
+        int id = scanner1.nextInt();
+        if (activeTask.containsKey(id)) {
+            Repeatable removedTask = activeTask.get(id);
+            removedTask.setArchived(true);
+            activeTask.put(id, removedTask);
+            System.out.println("Задача" + id + "удалена");
+        } else {
+            System.out.println("Такой задачи не существует");
+        }
     }
 
     public static String receiveTask(String task) {
         return  task;
+    }
+    public static void printActualTask() {
+        for (Repeatable task : activeTask.values()) {
+            System.out.println(task);
+        }
     }
 }

@@ -53,14 +53,19 @@ public class Main {
                 case 1:
                     System.out.println("Вы выбрали- добавить задачи : ");
                     TaskService.addTask(scanner);
+                    outputMenu();
+                    inputMenu();
                     break;
                 case 2:
                     System.out.println("Вы выбрали- удалять задачи\n");
+                    TaskService.deleteTask(scanner);
+                    outputMenu();
+                    inputMenu();
                     break;
                 case 3:
                     System.out.println("Вы выбрали- получать список задач на предстоящий день\n");
-                    outputMenuPeriod();
-                    inputMenuPeriod(inputRestriction(0, 5));
+                    outputMenu();
+                    inputMenu();
                     break;
                 default:
                     System.out.println("Вы ввели не верное число. Повторите ввод. ");
