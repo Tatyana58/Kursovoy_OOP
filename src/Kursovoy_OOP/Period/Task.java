@@ -20,7 +20,6 @@ public abstract class Task {
     public Task(String titleTask, String descriptionTask,Type typeTask, LocalDateTime localDateTime) throws TaskNotFoundException {
         this.titleTask = ValidateUtils.checkingString(titleTask);
         this.descriptionTask = ValidateUtils.checkingString(descriptionTask);
-        this.archived = false;
         this.typeTask = typeTask;
         this.dateTimeTask = localDateTime;
         id = count++;
@@ -58,13 +57,6 @@ public abstract class Task {
         this.dateTimeTask = dateTimeTask;
     }
 
-    public boolean isArchived() {
-        return archived;
-    }
-
-    public void setArchived(boolean archived) {
-        this.archived = archived;
-    }
 
     public static Integer getCount() {
         return count;
@@ -77,6 +69,7 @@ public abstract class Task {
     public Integer getId() {
         return id;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -93,14 +86,12 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "titleTask='" + titleTask + '\'' +
-                ", descriptionTask='" + descriptionTask + '\'' +
-                ", typeTask=" + typeTask +
-                ", dateTimeTask=" + dateTimeTask +
-                ", arhived=" + archived +
-                ", id=" + id +
-                '}';
+        return "Задача: " +
+                "Заголовок: " + titleTask + '\'' +
+                ", описание - " + descriptionTask + '\'' +
+                ", тип - " + typeTask +
+                ", дата задачи - " + dateTimeTask +
+                ", id = " + id;
     }
 }
 

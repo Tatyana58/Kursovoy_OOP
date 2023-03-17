@@ -7,5 +7,5 @@ public interface Repeatable {
     boolean checkingAppearance(LocalDateTime localDateTime);
     void setTitle(String title);
     LocalDateTime getDateTimeTask();
-    void setArchived(boolean archived);
+    //void setArchived(boolean archived);
 }
